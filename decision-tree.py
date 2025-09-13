@@ -28,3 +28,27 @@
 # Then, compute the Gini-index of the remaining nominal features for all the different classes of the current node. the lowest of the Gini-index out of the remaining nominal features gets set as a node.
 # the process repeats until all nominal features have been assigned to a node, then, generate the leaf nodes for that specific sequence of path down the tree.
 #another way to generate a leaf node is when the Gini-index of all nominal features evaluate to zero.
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+training_data = pd.read_csv('datasets/drug200.csv')
+features = training_data.iloc[1, :].values # takes the different nominal features that are going to be used to calculate the gini-index and puts them in a numpy array
+decisions = training_data.iloc[:, -1].values # takes the last column of the dataset for all the different results
+decision_classes = np.unique(decisions) # grabs the unique classes in the results
+
+
+print(training_data) #test if the training_data is correctly loaded in
+
+print(decision_classes) #test if the decision classes are correctly identified
+
+
+def gini_index(nominal_feature):
+    unique_elements = np.unique(training_data[training_data[feature] == nominal_feature])
+
+    for elements in unique_elements: 
+        feature_subset = training_data[training_data[feature] == elements]
+         
+        
